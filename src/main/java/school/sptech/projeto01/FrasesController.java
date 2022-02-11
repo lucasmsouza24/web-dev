@@ -59,8 +59,8 @@ public class FrasesController {
     //      empate  = 1 ponto
     //      derrota = 3 pontos
 
-    private int partidas = 0;
-    private int pontos = 0;
+    // private int partidas = 0;
+    // private int pontos = 0;
 
     private String pontuacao() {
         return String.format("Vitórias: %d\nDerrotas: %d\nEmpates: %d");
