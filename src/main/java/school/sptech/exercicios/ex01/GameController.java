@@ -18,6 +18,14 @@ public class GameController {
         return vitorias * 3 + empates;
     }
 
+    private int pontuacaoPotencial() {
+        return this.partidas() * 3;
+    }
+
+    private int aproveitamento() {
+        return (pontuacao() * 100) / pontuacaoPotencial();
+    }
+
     // endpoints
 
     @GetMapping("/")
@@ -56,6 +64,10 @@ public class GameController {
 
     @GetMapping("/pontuacao")
     public String getPontuacao() {
-        return String.format("Ola, você tem %d pontos e %d partidas.", this.pontuacao(), this.partidas());
+        if(this.partidas() > 0) {
+            return String.format("Ola, você tem %d pontos e %d partidas - Aproveitamento %s%%", this.pontuacao(), this.partidas(), this.aproveitamento());
+        } else {
+            return "Cadastre pelo menos uma vitória, empate ou derrota";
+        }
     }
 }
