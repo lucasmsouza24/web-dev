@@ -1,11 +1,12 @@
-package school.sptech.projeto02;
+package school.sptech.exercicios.ex03;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Projeto02 {
+public class Ex03Application {
+    
     public static void main(String[] args) {
-        SpringApplication.run(Projeto02.class, args);
+        SpringApplication.run(Ex03Application.class, args);
     }
 }
