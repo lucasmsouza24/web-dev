@@ -20,15 +20,21 @@ public class EscolaConstroller {
     @GetMapping("/cadastrar-estudante/{nome}")
     public String cadastrarEstudante(@PathVariable String nome) {
         this.nome = nome;
-        return String.format("studante %s cadastrado(a) com sucesso", nome);
+        return String.format("Estudante %s cadastrado(a) com sucesso", nome);
     }
 
     @GetMapping("/cadastrar-notas/{nota1}/{nota2}")
     public String cadastrarNotas(@PathVariable Double nota1,@PathVariable Double nota2) {
-        this.nota1 = nota1;
-        this.nota2 = nota2;
 
-        return "Notas cadastradas com sucesso";
+        if ((0 <= nota1 && nota1 <= 10) && (0 <= nota2 && nota2 <= 10)) {
+            this.nota1 = nota1;
+            this.nota2 = nota2;
+            
+            return "Notas cadastradas com sucesso";
+        } else {
+            return "Ambas as notas devem estar entre 0 e 10.";
+        }
+
     }
 
     @GetMapping("/resultado")
