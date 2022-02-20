@@ -42,8 +42,8 @@ public class PokemonController {
     }
 
     @GetMapping("/buscar/{indice}")
-    public String buscar(@PathVariable Integer indice) {
-        return pkms.get(indice).toString();
+    public Pokemon buscar(@PathVariable Integer indice) {
+        return pkms.get(indice);
     }
 
     @GetMapping("/atualizar/{indice}/{nome}/{tipo}/{forca}/{capturado}")
@@ -58,14 +58,11 @@ public class PokemonController {
     } 
 
     @GetMapping("/listar")
-    public String listar() {
+    public List<Pokemon> listar() {
 
-        String txt = "";
-
-        for (Pokemon p : pkms) {
-            txt = String.format("%s %s", txt, p.toString());
-        }
-
-        return txt;
+        return pkms;
     }
+
+    // @GetMapping("/{tipo}/contagem");
+    // public String 
 }
