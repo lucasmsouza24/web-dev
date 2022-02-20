@@ -18,6 +18,18 @@ public class Pokemon {
         this.capturado = capturado;
     }
 
+    // methods
+    public String toString() {
+        StringBuilder sb = new StringBuilder("<br> Pokemon");
+
+        sb.append(String.format("<br> &nbsp nome: %s", this.nome));
+        sb.append(String.format("<br> &nbsp tipo: %s", this.tipo));
+        sb.append(String.format("<br> &nbsp forca: %.2f", this.forca));
+        sb.append(String.format("<br> &nbsp capturado: %b<br>", this.capturado));
+
+        return String.valueOf(sb);
+    }
+
     // getters and setters
     public String getNome() {
         return nome;
