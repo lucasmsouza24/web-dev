@@ -18,7 +18,7 @@ public class PokemonController {
     @GetMapping("/test")
     public String test() {
         Pokemon p1 = new Pokemon("Pikachu", "Electricity", 600d, false);
-        Pokemon p2 = new Pokemon("Bulbassaur", "Grass", 830d, true);
+        Pokemon p2 = new Pokemon("Bulbassaur", "Grass", 4030d, true);
         Pokemon p3 = new Pokemon("Squartle", "Water", 960d, true);
 
         pkms.add(p1);
@@ -63,6 +63,55 @@ public class PokemonController {
         return pkms;
     }
 
-    // @GetMapping("/{tipo}/contagem");
-    // public String 
+    @GetMapping("/{tipo}/contagem")
+    public Integer contagem(@PathVariable String tipo) {
+        int amount = 0;
+
+        for (Pokemon p : pkms) {
+            if (p.getTipo().equals(tipo)) {
+                amount++;
+            }
+        }
+
+        return amount;
+    }
+
+    @GetMapping("/capturados")
+    public List<Pokemon> capturados(){
+        List<Pokemon> capturados = new ArrayList<Pokemon>();
+
+        for (Pokemon p : pkms) {
+            if (p.getCapturado()) {
+                capturados.add(p);
+            }
+        }
+
+        return capturados;
+    }
+
+    @GetMapping("/fortes")
+    public List<Pokemon> fortes(){
+        List<Pokemon> fortes = new ArrayList<Pokemon>();
+
+        for (Pokemon p : pkms) {
+            if (p.getForca() > 3000) {
+                fortes.add(p);
+            }
+        }
+
+        return fortes;
+    }
+
+    @GetMapping("/fracos")
+    public List<Pokemon> fracos(){
+        List<Pokemon> fracos = new ArrayList<Pokemon>();
+
+        for (Pokemon p : pkms) {
+            if (p.getForca() <= 3000) {
+                fracos.add(p);
+            }
+        }
+
+        return fracos;
+    }
 }
