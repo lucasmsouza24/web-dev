@@ -16,7 +16,7 @@ public class PokemonController {
 
     // test endpoint
     @GetMapping("/test")
-    public String test() {
+    public Message test() {
         Pokemon p1 = new Pokemon("Pikachu", "Electricity", 600d, false);
         Pokemon p2 = new Pokemon("Bulbassaur", "Grass", 4030d, true);
         Pokemon p3 = new Pokemon("Squartle", "Water", 960d, true);
@@ -25,20 +25,21 @@ public class PokemonController {
         pkms.add(p2);
         pkms.add(p3);
 
-        return "Pokemons criados";
+        return new Message("Pokemons criados");
     }
     
     @GetMapping("/cadastrar/{nome}/{tipo}/{forca}/{capturado}")
-    public String cadastrar(@PathVariable String nome, @PathVariable String tipo, @PathVariable Double forca, @PathVariable Boolean capturado) {
+    public Message cadastrar(@PathVariable String nome, @PathVariable String tipo, @PathVariable Double forca, @PathVariable Boolean capturado) {
         Pokemon p1 = new Pokemon(nome, tipo, forca, capturado);
         pkms.add(p1);
-        return String.format("Pokemon %s adicionado!", p1.getNome());
+        return new Message(String.format("Pokemon %s adicionado!", p1.getNome()));
     }
 
     @GetMapping("/remover/{indice}")
-    public String remover(@PathVariable Integer indice) {
-        pkms.remove((int) indice);
-        return "Pokemon removido";
+    public Message remover(@PathVariable int indice) {
+        String nome = pkms.get(indice).getNome();
+        pkms.remove(indice);
+        return new Message(String.format("Pokemon %s removido", nome));
     }
 
     @GetMapping("/buscar/{indice}")
@@ -47,19 +48,18 @@ public class PokemonController {
     }
 
     @GetMapping("/atualizar/{indice}/{nome}/{tipo}/{forca}/{capturado}")
-    public String atualizar(@PathVariable Integer indice, @PathVariable String nome, @PathVariable String tipo, @PathVariable Double forca, @PathVariable Boolean capturado) {
+    public Message atualizar(@PathVariable Integer indice, @PathVariable String nome, @PathVariable String tipo, @PathVariable Double forca, @PathVariable Boolean capturado) {
 
         pkms.get(indice).setNome(nome);
         pkms.get(indice).setTipo(tipo);
         pkms.get(indice).setForca(forca);
         pkms.get(indice).setCapturado(capturado);
 
-        return "Pokemon atualizado";
+        return new Message("Pokemon atualizado");
     } 
 
     @GetMapping("/listar")
     public List<Pokemon> listar() {
-
         return pkms;
     }
 
