@@ -2,6 +2,7 @@ package school.sptech.exercicios.ex04;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,10 +30,19 @@ public class PokemonController {
     }
     
     @GetMapping("/cadastrar/{nome}/{tipo}/{forca}/{capturado}")
-    public Message cadastrar(@PathVariable String nome, @PathVariable String tipo, @PathVariable Double forca, @PathVariable Boolean capturado) {
+    public Message cadastrar(
+        @PathVariable String nome, 
+        @PathVariable String tipo, 
+        @PathVariable Double forca, 
+        @PathVariable Boolean capturado
+    ) {
         Pokemon p1 = new Pokemon(nome, tipo, forca, capturado);
         pkms.add(p1);
-        return new Message(String.format("Pokemon %s adicionado!", p1.getNome()));
+
+        return new Message(String.format(
+            "Pokemon %s adicionado!", 
+            p1.getNome()
+        ));
     }
 
     @GetMapping("/remover/{indice}")
@@ -48,8 +58,13 @@ public class PokemonController {
     }
 
     @GetMapping("/atualizar/{indice}/{nome}/{tipo}/{forca}/{capturado}")
-    public Message atualizar(@PathVariable Integer indice, @PathVariable String nome, @PathVariable String tipo, @PathVariable Double forca, @PathVariable Boolean capturado) {
-
+    public Message atualizar(
+        @PathVariable Integer indice, 
+        @PathVariable String nome, 
+        @PathVariable String tipo, 
+        @PathVariable Double forca, 
+        @PathVariable Boolean capturado
+    ) {
         pkms.get(indice).setNome(nome);
         pkms.get(indice).setTipo(tipo);
         pkms.get(indice).setForca(forca);
@@ -64,54 +79,22 @@ public class PokemonController {
     }
 
     @GetMapping("/{tipo}/contagem")
-    public Integer contagem(@PathVariable String tipo) {
-        int amount = 0;
-
-        for (Pokemon p : pkms) {
-            if (p.getTipo().equals(tipo)) {
-                amount++;
-            }
-        }
-
-        return amount;
+    public long contagem(@PathVariable String tipo) {
+        return pkms.stream().filter(pokemon -> pokemon.getTipo().equals(tipo)).count();
     }
 
     @GetMapping("/capturados")
-    public List<Pokemon> capturados(){
-        List<Pokemon> capturados = new ArrayList<Pokemon>();
-
-        for (Pokemon p : pkms) {
-            if (p.getCapturado()) {
-                capturados.add(p);
-            }
-        }
-
-        return capturados;
+    public Stream<Pokemon> capturados(){
+        return pkms.stream().filter(pokemon -> pokemon.getCapturado());
     }
 
     @GetMapping("/fortes")
-    public List<Pokemon> fortes(){
-        List<Pokemon> fortes = new ArrayList<Pokemon>();
-
-        for (Pokemon p : pkms) {
-            if (p.getForca() > 3000) {
-                fortes.add(p);
-            }
-        }
-
-        return fortes;
+    public Stream<Pokemon> fortes(){
+        return pkms.stream().filter(pokemon -> pokemon.getForca() > 3000);
     }
 
     @GetMapping("/fracos")
-    public List<Pokemon> fracos(){
-        List<Pokemon> fracos = new ArrayList<Pokemon>();
-
-        for (Pokemon p : pkms) {
-            if (p.getForca() <= 3000) {
-                fracos.add(p);
-            }
-        }
-
-        return fracos;
+    public Stream<Pokemon> fracos(){
+        return pkms.stream().filter(pokemon -> pokemon.getForca() <= 3000);
     }
 }
