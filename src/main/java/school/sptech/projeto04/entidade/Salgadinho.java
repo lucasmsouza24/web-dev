@@ -1,4 +1,4 @@
-package com.sptech.demo.entidade;
+package school.sptech.projeto04.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
