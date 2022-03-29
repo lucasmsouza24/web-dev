@@ -1,9 +1,8 @@
-package com.sptech.demo.controle;
+package school.sptech.projeto04.controle;
 
 import java.util.List;
-import com.sptech.demo.entidade.Salgadinho;
-import com.sptech.demo.repositorio.SalgadinhoRepository;
 import org.springframework.http.ResponseEntity;
+import school.sptech.projeto04.repositorio.SalgadinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import school.sptech.projeto04.entidade.Salgadinho;
 
 @RestController
 @RequestMapping("/salgadinhos")
