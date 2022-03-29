@@ -28,7 +28,7 @@ public class SalgadinhoControler {
     }
 
     @GetMapping
-    public ResponseEntity<Object> getSalgadinhos() {
+    public ResponseEntity<List<Salgadinho>> getSalgadinhos() {
         List<Salgadinho> salgadinhos = repository.findAll();
 
         if(salgadinhos.isEmpty()) {
